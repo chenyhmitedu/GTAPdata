@@ -26,7 +26,7 @@ version = "0.10.15"
 deps = ["CSV", "DataFrames"]
 git-tree-sha1 = "efb2afb78c8b372c40da736c361eb053f9da0568"
 repo-rev = "master"
-repo-url = "http://github.com/chenyhmitedu/CSVtoDIC"
+repo-url = "https://github.com/chenyhmitedu/CSVtoDIC"
 uuid = "cf815f9a-3c92-448a-b56b-77b95c7ee9f9"
 version = "0.1.0"
 
