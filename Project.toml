@@ -1,3 +1,8 @@
+name = "GTAPdata"
+uuid = "130c15d4-ad42-4bd4-91d3-6787eb393e58"
+authors = ["Henry Chen <chenyh@mit.edu>"]
+version = "0.1.0"
+
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CSVtoDIC = "cf815f9a-3c92-448a-b56b-77b95c7ee9f9"
