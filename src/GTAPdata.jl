@@ -1,30 +1,34 @@
+#using Pkg
+Pkg.develop(url = "https://github.com/chenyhmitedu/CSVtoDIC")
+#using CSV, DataFrames, CSVtoDIC
+
 module GTAPdata
 
-using CSV, DataFrames, JLD2, CSVtoDIC
+import JLD2, CSVtoDIC
 
-function io(name::String = "./src/Input/")  
+function io(input::String = "./src/data/", output::String = joinpath("src", "IO.jld2"))  
 
     # Convert CSV files to Dictionaries or vectors
-    results = source(name)
+    results = CSVtoDIC.source(input)
     d = results[1]
     s = results[2]
 
     # Expand to the full set space and use GTAP notation
-    vdfm    = fullspace(d["vdfm"], s["set_i"], s["set_g"], s["set_r"])                      
-    vxmd    = fullspace(d["vxmd"], s["set_i"], s["set_r"], s["set_r"])
-    vst     = fullspace(d["vst"], s["set_i"], s["set_r"])
-    rtms0   = fullspace(d["rtms"], s["set_i"], s["set_r"], s["set_r"])
-    rtxs0   = fullspace(d["rtxs"], s["set_i"], s["set_r"], s["set_r"])
-    vifm    = fullspace(d["vifm"], s["set_i"], s["set_g"], s["set_r"])
-    rtfd0   = fullspace(d["rtfd"], s["set_i"], s["set_g"], s["set_r"])
-    rtfi0   = fullspace(d["rtfi"], s["set_i"], s["set_g"], s["set_r"])
-    rto0    = fullspace(d["rto"], s["set_g"], s["set_r"])
-    vfm     = fullspace(d["vfm"], s["set_f"], s["set_g"], s["set_r"])
-    rtf0    = fullspace(d["rtf"], s["set_f"], s["set_g"], s["set_r"])
-    vtwr    = fullspace(d["vtwr"], s["set_i"], s["set_i"], s["set_r"], s["set_r"])
-    esubd   = fullspace(d["esubd"], s["set_i"])
-    esubm   = fullspace(d["esubm"], s["set_i"])
-    esubva  = fullspace(d["esubva"], s["set_g"])
+    vdfm    = CSVtoDIC.fullspace(d["vdfm"], s["set_i"], s["set_g"], s["set_r"])                      
+    vxmd    = CSVtoDIC.fullspace(d["vxmd"], s["set_i"], s["set_r"], s["set_r"])
+    vst     = CSVtoDIC.fullspace(d["vst"], s["set_i"], s["set_r"])
+    rtms0   = CSVtoDIC.fullspace(d["rtms"], s["set_i"], s["set_r"], s["set_r"])
+    rtxs0   = CSVtoDIC.fullspace(d["rtxs"], s["set_i"], s["set_r"], s["set_r"])
+    vifm    = CSVtoDIC.fullspace(d["vifm"], s["set_i"], s["set_g"], s["set_r"])
+    rtfd0   = CSVtoDIC.fullspace(d["rtfd"], s["set_i"], s["set_g"], s["set_r"])
+    rtfi0   = CSVtoDIC.fullspace(d["rtfi"], s["set_i"], s["set_g"], s["set_r"])
+    rto0    = CSVtoDIC.fullspace(d["rto"], s["set_g"], s["set_r"])
+    vfm     = CSVtoDIC.fullspace(d["vfm"], s["set_f"], s["set_g"], s["set_r"])
+    rtf0    = CSVtoDIC.fullspace(d["rtf"], s["set_f"], s["set_g"], s["set_r"])
+    vtwr    = CSVtoDIC.fullspace(d["vtwr"], s["set_i"], s["set_i"], s["set_r"], s["set_r"])
+    esubd   = CSVtoDIC.fullspace(d["esubd"], s["set_i"])
+    esubm   = CSVtoDIC.fullspace(d["esubm"], s["set_i"])
+    esubva  = CSVtoDIC.fullspace(d["esubva"], s["set_g"])
     set_i   = s["set_i"]
     set_g   = s["set_g"]
     set_r   = s["set_r"]
@@ -138,11 +142,9 @@ function io(name::String = "./src/Input/")
     esubf       = Dict(i => 1.0 for i ∈ set_g)
     esubc       = 1.0
 
-    @save "IO.jld2" vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi vdm vom pvxmd pvtwr vtw vim vb d vafm etadx esub vxm vhm esubn esubve esubef esubf esubc evom
+    JLD2.@save output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi vdm vom pvxmd pvtwr vtw vim vb d vafm etadx esub vxm vhm esubn esubve esubef esubf esubc evom
 
     return IO
 end
-
-export io
 
 end # module GTAPdata
