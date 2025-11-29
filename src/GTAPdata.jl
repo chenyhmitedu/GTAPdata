@@ -1,6 +1,7 @@
-#using Pkg
-Pkg.develop(url = "https://github.com/chenyhmitedu/CSVtoDIC")
-#using CSV, DataFrames, CSVtoDIC
+#==
+The purpose of the GTAPdata.jl file is to define the module's code and functions. 
+It should not contain commands that manage the package environment itself.
+==#
 
 module GTAPdata
 
@@ -144,7 +145,8 @@ function io(input::String, output::String)
 
     JLD2.@save output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi vdm vom pvxmd pvtwr vtw vim vb d vafm etadx esub vxm vhm esubn esubve esubef esubf esubc evom
 
-    return IO
+    return
+    
 end
 
 end # module GTAPdata
