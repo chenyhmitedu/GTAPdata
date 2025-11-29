@@ -6,7 +6,7 @@ module GTAPdata
 
 import JLD2, CSVtoDIC
 
-function io(input::String = "./src/data/", output::String = joinpath("src", "IO.jld2"))  
+function io(input::String, output::String)  
 
     # Convert CSV files to Dictionaries or vectors
     results = CSVtoDIC.source(input)
