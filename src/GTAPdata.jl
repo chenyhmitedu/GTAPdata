@@ -75,6 +75,10 @@ function io(input::String, output::String)
     #key = [k for (k, v) in vtw if v == 0]
     #key = [k for (k, v) in vim if v == 0]
 
+    evom  = Dict((f, r) => sum(vfm[f, j, r] for j ∈ set_i)
+                        for f ∈ set_f, r ∈ set_r
+    )
+
     pvxmd = Dict(
         (i, s, r) => (1 + rtms0[(i, s, r)])*(1 - rtxs0[(i, s, r)]) for i ∈ set_i, s ∈ set_r, r ∈ set_r
     )
@@ -275,7 +279,7 @@ function io(input::String, output::String)
         for r ∈ set_r
     )
 
-    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind epslon
+    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm evom rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind epslon
 
 
 
