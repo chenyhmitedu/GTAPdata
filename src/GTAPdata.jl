@@ -104,12 +104,14 @@ function io(input::String, output::String)
         for r ∈ set_r
     )
 
+    #=
     vb0 = Dict(
         r => 
             sum((vxmd[(i, s, r)]*(1-rtxs0[(i, s, r)]) + sum(vtwr[(j, i, s, r)] for j ∈ set_i)) for i ∈ set_i, s ∈ set_r)
             -(sum(vxmd[(i, r, s)] for i ∈ set_i, s ∈ set_r)+sum(vst[(i, r)] for i ∈ set_i))            
         for r ∈ [:BGD]
     )
+            =#
 
     #=
     vb_test = Dict(
