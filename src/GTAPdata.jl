@@ -5,6 +5,7 @@ It should not contain commands that manage the package environment itself.
 
 module GTAPdata
 
+# Many package developers prefer import because it makes the source of functions explicit.
 import JLD2, CSVtoDIC
 
 function io(input::String, output::String)  
