@@ -43,7 +43,7 @@ function io(input::String, output::String)
     set_sf  = [:lnd, :fix]
     set_mf  = setdiff(set_f, set_sf)
     set_fe  = [:coa, :gas, :p_c]
-    set_ec  = set_fe ∪ [:oil, :elec]                                                                   
+#    set_ec  = set_fe ∪ [:oil, :elec]                                                                   
 
     # Assignment done in GTAPinGAMS
     d["esub"]       = Dict(i => 0 for i ∈ s["set_g"])       # Top-level elasticity of substitution
@@ -182,7 +182,8 @@ function io(input::String, output::String)
 
     # eind(i,g,r)			= (evd(i,g,r)+evi(i,g,r))/23.88;
     eind        = Dict((i, g, r) => (evd[(i, g, r)]+evi[(i, g, r)])/23.88
-                        for i ∈ set_ec, g ∈ set_g, r ∈ set_r
+                       # for i ∈ set_ec, g ∈ set_g, r ∈ set_r
+                        for i ∈ set_i, g ∈ set_g, r ∈ set_r
     )
 
     # Emissions coefficient (bn-tCO2/EJ)
@@ -282,11 +283,7 @@ function io(input::String, output::String)
         for r ∈ set_r
     )
 
-    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe set_ec vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm evom rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind evt epslon
-
-
-
-
+    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm evom rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind evt epslon
 
     return
     
