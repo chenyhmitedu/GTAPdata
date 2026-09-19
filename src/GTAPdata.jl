@@ -186,11 +186,12 @@ function io(input::String, output::String)
                         for i ∈ set_i, g ∈ set_g, r ∈ set_r
     )
 
-    # Emissions coefficient (bn-tCO2/EJ)
+    # Emissions coefficient (bn-tCO2/EJ); assume crude oil is not combusted
     epslon      = Dict(
     :coa => 0.1*44/12*0.24686,                  
     :p_c => 0.1*44/12*0.199  ,                  
-    :gas => 0.1*44/12*0.137                     
+    :gas => 0.1*44/12*0.137,
+    :oil => 0.0                     
     )
     
     # Declare CSAVE elasticities not in GTAP9data package
