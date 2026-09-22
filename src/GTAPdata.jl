@@ -35,6 +35,39 @@ function io(input::String, output::String)
     evi     = CSVtoDIC.fullspace(d["evi"], s["set_i"], s["set_g"], s["set_r"])
     evt     = CSVtoDIC.fullspace(d["evt"], s["set_i"], s["set_r"], s["set_r"])
 
+    # Rescaling
+    sfactor = 100
+
+    vdfm    = Dict(
+        (i, g, r) => vdfm[i, g, r]/sfactor
+        for i ∈ s["set_i"], g ∈ s["set_g"], r ∈ s["set_r"]
+    )
+
+    vxmd    = Dict(
+        (i, r, rr) => vxmd[i, r, rr]/sfactor
+        for i ∈ s["set_i"], r ∈ s["set_r"], rr ∈ s["set_r"]
+    )
+
+    vst     = Dict(
+        (i, r) => vst[i, r]/sfactor
+        for i ∈ s["set_i"], r ∈ s["set_r"]
+    )
+
+    vifm    = Dict(
+        (i, g, r) => vifm[i, g, r]/sfactor
+        for i ∈ s["set_i"], g ∈ s["set_g"], r ∈ s["set_r"]
+    )    
+
+    vfm     = Dict(
+        (f, g, r) => vfm[f, g, r]/sfactor
+        for f ∈ s["set_f"], g ∈ s["set_g"], r ∈ s["set_r"]
+    )    
+
+    vtwr    = Dict(
+        (i, ii, r, rr) => vtwr[i, ii, r, rr]/sfactor
+        for i ∈ s["set_i"], ii ∈ s["set_i"], r ∈ s["set_r"], rr ∈ s["set_r"]
+    )    
+
     set_i   = s["set_i"]
     set_g   = s["set_g"]
     set_r   = s["set_r"]
@@ -284,7 +317,7 @@ function io(input::String, output::String)
         for r ∈ set_r
     )
 
-    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm evom rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind evt epslon
+    JLD2.@save  output vdfm vxmd vst rtms0 rtxs0 vifm rtfd0 rtfi0 rto0 vfm rtf0 vtwr esubd esubm esubva set_i set_g set_r set_f set_sf set_mf set_cgi set_fe vdm vom pvxmd pvtwr vtw vim vb vafm vafm0 d etadx esub vxm vhm esubn esubi esubve esubef esubf esubc evfm evom rtxse e0 m0 rtmsm rtfaa vafms vdfms vifms vafmi eind evt epslon sfactor
 
     return
     
