@@ -36,7 +36,7 @@ function io(input::String, output::String)
     evt     = CSVtoDIC.fullspace(d["evt"], s["set_i"], s["set_r"], s["set_r"])
 
     # Rescaling
-    sfactor = 100
+    sfactor = 10
 
     vdfm    = Dict(
         (i, g, r) => vdfm[i, g, r]/sfactor
